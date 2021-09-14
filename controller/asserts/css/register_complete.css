@@ -1,0 +1,39 @@
+body{
+    background-color:#ffffff;
+    margin:0;
+    min-width:960px;
+}
+header{
+    background-color:#ffffff;
+    border-bottom:1px solid #cccccc;
+}
+header img{
+    width:300px;
+}
+.container{
+    width:700px;
+    margin:0 auto;
+}
+main{
+    width:370px;
+    margin:0 auto;
+}
+.text{
+    font-size:20px;
+    padding-top:200px;
+    padding-bottom:200px;
+}
+
+footer{
+    margin-top:20px;
+    background-color:#cccccc;
+    border-top:1px solid #cccccc;
+}
+
+footer img{
+    width:150px;
+}
+footer p{
+    text-align:center;
+    font-size:5px;
+}

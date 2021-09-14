@@ -1,0 +1,55 @@
+main{
+    padding-top:20px;
+}
+.info{
+    margin:40px 20px 30px 20px;
+    display:flex;
+}
+.info h2{
+    font-size:25px;
+    font-weight:bold;
+    font-family: 'Open Sans', sans-serif;
+}
+.info p{
+    font-size:12px;
+    font-family: 'Open Sans', sans-serif;
+}
+.main-contets{
+    padding:50px;
+}
+.rank_list{
+    font-family: 'Oswald', sans-serif;
+    margin:0 auto;
+}
+.rank_list tr {
+    font-size: 1.5rem;
+    margin-bottom: .5rem;
+    line-height: 1.7;
+}
+.rank_list th {
+    font-weight: normal;
+}
+.rank_list td {
+    padding-left: 1rem;
+}
+.title{
+    
+    margin-bottom: 26px;
+    text-align:center;
+    font-size:7rem;
+    font-family: 'Train One', cursive;
+}
+.sub-contents{
+    margin-top:30px;
+    border-radius: 5% / 5%;
+}
+.select{
+    margin:0 10px;
+}
+.table{
+    width:1000px;
+    margin:0 auto;
+}
+.a{
+    text-decoration: none;
+}

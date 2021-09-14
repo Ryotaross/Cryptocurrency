@@ -1,0 +1,90 @@
+<?php
+function get_buy_history($dbh,$userid){
+    try{
+        $sql = 'SELECT bought.item_id,items.name,items.img,bought.price,bought.how_many,bought.bought_date FROM items
+                INNER JOIN bought ON items.id = bought.item_id WHERE bought.user_id = ? ORDER BY bought.bought_date desc';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(1,$userid,PDO::PARAM_STR);
+        $stmt->execute();
+        $rows = $stmt->fetchAll();
+    }catch(PDOException $e){
+        throw $e;
+    }
+    return $rows;
+}
+function get_my_data($dbh,$userid){
+    try{
+        $sql = 'SELECT sum(bought.how_many),items.name,items.price,items.id FROM items INNER JOIN bought ON items.id = bought.item_id WHERE bought.user_id = ? 
+                GROUP BY bought.item_id ORDER BY items.id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(1,$userid,PDO::PARAM_STR);
+        $stmt->execute();
+        $rows = $stmt->fetchAll();
+    }catch(PDOException $e){
+        throw $e;
+    }
+    return $rows;
+}
+function get_mydata_sum($data){
+    $sum = 0;
+    foreach($data as $key => $value){
+        $item_sum = $value['price'] * $value['sum(bought.how_many)'];
+        $sum += $item_sum;
+    }
+    return $sum;
+}
+function get_sell_cart_data($dbh,$userid,$id){
+    try{
+        $sql = 'SELECT how_many from sell_cart WHERE user_id = ? AND item_id = ? ';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(1,$userid,PDO::PARAM_STR);
+        $stmt->bindValue(2,$id,PDO::PARAM_STR);
+        $stmt->execute();
+        $rows = $stmt->fetchAll();
+    }catch(PDOException $e){
+        throw $e;
+    }
+    return $rows;
+}
+function post_add_sell_cart($dbh,$userid,$id,$now_date){
+    try{
+        $sql = 'INSERT sell_cart(user_id,item_id,how_many,create_date,update_date) VALUES(?,?,?,?,?)';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(1,$userid,PDO::PARAM_STR);
+        $stmt->bindValue(2,$id,PDO::PARAM_STR);
+        $stmt->bindValue(3,'1',PDO::PARAM_STR);
+        $stmt->bindValue(4,$now_date,PDO::PARAM_STR);
+        $stmt->bindValue(5,$now_date,PDO::PARAM_STR);
+        $stmt->execute();
+    }catch(PDOException $e){
+        throw $e;
+    }
+}
+function post_sell_art($dbh,$userid,$id,$count,$now_date){
+    try{
+        $sql = 'UPDATE sell_cart SET how_many = ?, update_date = ?  WHERE user_id = ? AND item_id = ?';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(1,$count,PDO::PARAM_STR);
+        $stmt->bindValue(2,$now_date,PDO::PARAM_STR);
+        $stmt->bindValue(3,$userid,PDO::PARAM_STR);
+        $stmt->bindValue(4,$id,PDO::PARAM_STR);
+        $stmt->execute();
+    }catch(PDOException $e){
+        throw $e;
+    }
+}
+function adding_sell_cart($dbh,$userid,$id,$now_date){
+    if(count($userid) !== 0){
+        $userdata = get_sell_cart_data($dbh,$userid,$id);
+        if(count($userdata) === 0){
+            post_add_sell_cart($dbh,$userid,$id,$now_date);
+            set_success('カートに追加しました');
+        }else {
+            $count = $userdata[0]['how_many'] + 1;
+            post_sell_cart($dbh,$userid,$id,$count,$now_date);
+            set_success('カートに追加しました');
+        }
+    } else {
+            set_error('不正なユーザーです');
+    }
+}
