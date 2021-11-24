@@ -47,15 +47,19 @@
                                               <form method = "post">
                                                     <?php if($value['stock'] === 0){ ?>
                                                             <p class="text-danger">売り切れ</p>
+                                                    <?php }elseif(!isset($username)){ ?>
+                                                        <a class="btn btn-primary btn-lg btn-block" href="login.php">カートに追加</a>
                                                     <?php }else{ ?>
-                                                            <input  class="btn btn-primary btn-lg btn-block" type="submit" name="cart" value="カートに追加">
+                                                            <input class="btn btn-primary btn-lg btn-block" type="submit" name="cart" value="カートに追加">
                                                             <input type="hidden" name="buy_id" value="<?php print $value['id'];?>">
                                                     <?php } ?>
                                                 </form>
+                                                <!--
                                                 <form method="get" action="../controller/show.php" style="margin-top:5px">
                                                     <input class="btn btn-primary btn-lg btn-block mybtn " type="submit" name="show" value="詳細">
                                                     <input type="hidden" name="show_id" value="<?php print $value['id']?>">
                                                 </form>
+                                                -->
                                             </div>
                                         </div>
                                 </div>

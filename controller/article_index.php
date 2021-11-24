@@ -3,8 +3,6 @@ require_once '../conf/const.php';
 require_once '../model/coinshop.php';
 require_once '../model/article_index.php';
 
-session_start();
-session_check();
 
 try{
     $dbh = get_db_connect();

@@ -12,7 +12,6 @@ $userdata = array();
 $now_date = date('Y-m-d H:i:s');
 
 session_start();
-session_check();
 $username = get_username();
 
 try{

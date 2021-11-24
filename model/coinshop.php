@@ -28,6 +28,7 @@ function session_check(){
     $username = $_SESSION['username'];
 }
 }
+
 function get_username(){
     if(isset($_SESSION['username'])){
         $username = $_SESSION['username'];
@@ -47,7 +48,7 @@ function logout_method(){
     }
     
     session_destroy();
-    header('Location:/login.php');
+    header('Location:/top.php');
     exit;
 }
 function get_post_data($key){

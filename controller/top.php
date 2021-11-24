@@ -8,8 +8,6 @@ $data = array();
 $article = array();
 $now_date = date('Y-m-d H:i:s');
 
-session_start();
-session_check();
 
 try{
     $dbh = get_db_connect();

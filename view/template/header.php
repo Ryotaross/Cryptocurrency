@@ -18,18 +18,21 @@
                       <li class="nav-item">
                         <a class="nav-link" href="sell.php">Sell</a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="article_index.php">Blog</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="article_post.php">Write</a>
-                      </li>
+                      <?php if(isset($username)){ ?>
                       <li class="nav-item">
                         <a class="nav-link" href="mypage.php">Mypage</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="logout.php">Logout</a>
                       </li>
+                      <?php }else{ ?>
+                      <li class="nav-item">
+                        <a class="nav-link" href="login.php">LogIn</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                      </li>
+                      <?php } ?>
                     </ul>
                     <form class="form-inline my-2 my-md-0" method="get" action="/search.php" >
                       <div style="display:flex">
